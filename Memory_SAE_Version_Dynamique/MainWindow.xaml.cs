@@ -22,6 +22,10 @@ namespace Memory_SAE_Version_Dynamique
     /// </summary>
     public partial class MainWindow : Window
     {
+
+
+
+        private Button[,] listeBoutons;
         public MainWindow()
         {
             InitializeComponent();
@@ -52,13 +56,14 @@ namespace Memory_SAE_Version_Dynamique
         public void Initialisation(string difficulteChoisie)
         {
             int nbLigne = 0;
-            List<Button> listeBoutons = new List<Button>();
+           
             if (difficulteChoisie == "Facile")
                 nbLigne = 4;
             else if (difficulteChoisie == "Intermédiaire")
                 nbLigne = 6;
             else
                 nbLigne = 8;
+            listeBoutons = new Button[nbLigne, nbLigne];
             for (int i = 0; i < nbLigne; i++)
             {
                 ColumnDefinition colDef = new ColumnDefinition();
@@ -67,26 +72,25 @@ namespace Memory_SAE_Version_Dynamique
                 GridJeu.RowDefinitions.Add(ligDef);
                 for (int j = 0; j < nbLigne; j++)
                 {
-                    listeBoutons.Add(new Button());
+                    listeBoutons[i,j]=new Button();
 
                 }
             }
-            foreach (Button bouton in listeBoutons)
-            {
-                for (int c = 0; c < nbLigne; c++)
+           
+                for (int c = 0; c < listeBoutons.Length; c++)
                 {
-                    for (int l = 0; l < nbLigne; l++)
+                    for (int l = 0; l < listeBoutons.Length; l++)
                     {
-                        Grid.SetColumn(bouton, c);
-                        Grid.SetRow(bouton, l);
+                    Grid.SetColumn(listeBoutons[c,l], c);
+                    Grid.SetRow(listeBoutons[c,l], l);
                     }
                 }
-            }
+            
 #if DEBUG
-            for (int i = 0; i < listeBoutons.Count; i++)
+         /*   for (int i = 0; i < listeBoutons.Count; i++)
             {
                 Console.WriteLine("Debug version \n " + listeBoutons[i] + "\nbouton " + i);
-            }
+            }*/
 #endif
         }
     }
