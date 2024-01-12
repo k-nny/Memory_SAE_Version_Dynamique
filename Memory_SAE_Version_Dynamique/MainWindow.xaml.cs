@@ -40,16 +40,16 @@ namespace Memory_SAE_Version_Dynamique
             //Creation du menu des difficultés
             MenuDifficulte ChoixDifficulte = new MenuDifficulte();
 
-
             resultat = (bool)ChoixDifficulte.ShowDialog();
             if (resultat == false)
             {
-                resultatMessageBox = MessageBox.Show("Vous êtes sur le point de quitter le meilleur jeu de Memoire de 2024. Voulez vous vraiment le quitter ?", "Verification Annulation", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-                if (resultatMessageBox == MessageBoxResult.Yes)
+                resultatMessageBox = MessageBox.Show("Vous venez de quitter le meilleur jeu de mémoire de 2024", "Information Annulation", MessageBoxButton.OK, MessageBoxImage.Warning);
+                if (resultatMessageBox == MessageBoxResult.OK)
                 {
                     this.Close();
                 }
             }
+
             difficulteChoisie = ChoixDifficulte.ComboBoxDifficulté.Text;
             //resultatMessageBox = MessageBoxResult.Yes;
             listeBoutonsDosCarte = Initialisation(difficulteChoisie);
@@ -99,7 +99,7 @@ namespace Memory_SAE_Version_Dynamique
                     Grid.SetRow(listeBoutons[i, j], j);
                     dosCarte.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/dos_carte.jpg"));
                     listeBoutonsDosCarte[i, j] = new Button() { Background = dosCarte };
-                    listeBoutonsDosCarte[i, j].Click += CLiqueCarte;
+                    listeBoutonsDosCarte[i, j].Click += CliqueCarte;
                     GridJeu.Children.Add(listeBoutonsDosCarte[i, j]);
                     Grid.SetColumn(listeBoutonsDosCarte[i, j], i);
                     Grid.SetRow(listeBoutonsDosCarte[i, j], j);
@@ -109,9 +109,9 @@ namespace Memory_SAE_Version_Dynamique
             return listeBoutonsDosCarte;
         }
 
-        private void CLiqueCarte(object sender, RoutedEventArgs e)
+        private void CliqueCarte(object sender, RoutedEventArgs e)
         {
-           Button cartecliquee = (Button ) sender;
+            Button cartecliquee = (Button)sender;
             cartecliquee.Visibility = Visibility.Hidden;
         }
 
@@ -128,6 +128,6 @@ namespace Memory_SAE_Version_Dynamique
                 images[n] = value;
             }
         }
-      
+
     }
 }
