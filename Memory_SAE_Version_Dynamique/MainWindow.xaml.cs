@@ -30,10 +30,8 @@ namespace Memory_SAE_Version_Dynamique
         {
             InitializeComponent();
             bool resultat;
+            string difficulteChoisie;
             MessageBoxResult resultatMessageBox = MessageBoxResult.No;
-
-
-            InitializeComponent();
 
             //Creation du menu des difficultés
             MenuDifficulte ChoixDifficulte = new MenuDifficulte();
@@ -47,16 +45,17 @@ namespace Memory_SAE_Version_Dynamique
                 {
                     this.Close();
                 }
-            }
+            }   
+            difficulteChoisie = ChoixDifficulte.ComboBoxDifficulté.Text;
             //resultatMessageBox = MessageBoxResult.Yes;
-            Initialisation("Facile");
+            Initialisation(difficulteChoisie);
 
 
         }
         public void Initialisation(string difficulteChoisie)
         {
             int nbLigne = 0;
-           
+
             if (difficulteChoisie == "Facile")
                 nbLigne = 4;
             else if (difficulteChoisie == "Intermédiaire")
@@ -72,25 +71,25 @@ namespace Memory_SAE_Version_Dynamique
                 GridJeu.RowDefinitions.Add(ligDef);
                 for (int j = 0; j < nbLigne; j++)
                 {
-                    listeBoutons[i,j]=new Button();
+                    listeBoutons[i, j] = new Button();
 
                 }
             }
-           
-                for (int c = 0; c < listeBoutons.Length; c++)
-                {
-                    for (int l = 0; l < listeBoutons.Length; l++)
-                    {
-                    Grid.SetColumn(listeBoutons[c,l], c);
-                    Grid.SetRow(listeBoutons[c,l], l);
-                    }
-                }
-            
-#if DEBUG
-         /*   for (int i = 0; i < listeBoutons.Count; i++)
+
+            for (int c = 0; c < nbLigne; c++)
             {
-                Console.WriteLine("Debug version \n " + listeBoutons[i] + "\nbouton " + i);
-            }*/
+                for (int l = 0; l < nbLigne; l++)
+                {
+                    Grid.SetColumn(listeBoutons[c, l], c);
+                    Grid.SetRow(listeBoutons[c, l], l);
+                }
+            }
+
+#if DEBUG
+            //for (int i = 0; i < listeBoutons.Count; i++)
+            //{
+            //    Console.WriteLine("Debug version \n " + listeBoutons[i] + "\nbouton " + i);
+            //}
 #endif
         }
     }
