@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Memory_SAE_Version_Dynamique
 {
@@ -26,6 +27,9 @@ namespace Memory_SAE_Version_Dynamique
 
 
         private Button[,] listeBoutons;
+        private Button[,] listeBoutonsDosCarte;
+        private ImageBrush dosCarte = new ImageBrush();
+        private int nbLigne;
         public MainWindow()
         {
             InitializeComponent();
@@ -45,16 +49,15 @@ namespace Memory_SAE_Version_Dynamique
                 {
                     this.Close();
                 }
-            }   
+            }
             difficulteChoisie = ChoixDifficulte.ComboBoxDifficulté.Text;
             //resultatMessageBox = MessageBoxResult.Yes;
-            Initialisation(difficulteChoisie);
-
-
+            listeBoutonsDosCarte = Initialisation(difficulteChoisie);
         }
-        public void Initialisation(string difficulteChoisie)
+
+        public Button[,] Initialisation(string difficulteChoisie)
         {
-            int nbLigne = 0, nbCartes, numImage=0;
+            int nbCartes, numImage = 0;
 
             if (difficulteChoisie == "Facile")
                 nbLigne = 4;
@@ -62,11 +65,11 @@ namespace Memory_SAE_Version_Dynamique
                 nbLigne = 6;
             else
                 nbLigne = 8;
-            nbCartes = (nbLigne * nbLigne)/2;
+            nbCartes = (nbLigne * nbLigne) / 2;
             List<string> images = new List<string>();
-            for (int c  = 0; c < nbCartes; c++)
+            for (int c = 0; c < nbCartes; c++)
             {
-                for (int d = 0; d < 2; d++) 
+                for (int d = 0; d < 2; d++)
                 {
                     images.Add("img/img1 (" + c + ").jpg");
                 }
@@ -76,6 +79,7 @@ namespace Memory_SAE_Version_Dynamique
             Console.WriteLine(images.Count);
 #endif
             listeBoutons = new Button[nbLigne, nbLigne];
+            listeBoutonsDosCarte = new Button[nbLigne, nbLigne];
             for (int i = 0; i < nbLigne; i++)
             {
                 ColumnDefinition colDef = new ColumnDefinition();
@@ -89,17 +93,28 @@ namespace Memory_SAE_Version_Dynamique
 #endif
                     ImageBrush initialisation = new ImageBrush();
                     initialisation.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + images[numImage]));
-                    listeBoutons[i, j] = new Button() {Background=initialisation } ;
+                    listeBoutons[i, j] = new Button() { Background = initialisation };
                     GridJeu.Children.Add(listeBoutons[i, j]);
                     Grid.SetColumn(listeBoutons[i, j], i);
-                    Grid.SetRow(listeBoutons[i, j],j);
+                    Grid.SetRow(listeBoutons[i, j], j);
+                    dosCarte.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/dos_carte.jpg"));
+                    listeBoutonsDosCarte[i, j] = new Button() { Background = dosCarte };
+                    listeBoutonsDosCarte[i, j].Click += CLiqueCarte;
+                    GridJeu.Children.Add(listeBoutonsDosCarte[i, j]);
+                    Grid.SetColumn(listeBoutonsDosCarte[i, j], i);
+                    Grid.SetRow(listeBoutonsDosCarte[i, j], j);
                     numImage++;
                 }
             }
-
-
-
+            return listeBoutonsDosCarte;
         }
+
+        private void CLiqueCarte(object sender, RoutedEventArgs e)
+        {
+           Button cartecliquee = (Button ) sender;
+            cartecliquee.Visibility = Visibility.Hidden;
+        }
+
         private void MelangeImages(List<string> images)
         {
             Random random = new Random();
@@ -113,5 +128,6 @@ namespace Memory_SAE_Version_Dynamique
                 images[n] = value;
             }
         }
+      
     }
 }

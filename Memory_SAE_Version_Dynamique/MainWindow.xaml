@@ -11,6 +11,5 @@
     mc:Ignorable="d">
     <Grid
         x:Name="GridJeu"
-        Margin="0,0,150,0"
-        ShowGridLines="true" />
+        Margin="0,0,150,0"/>
 </Window>
