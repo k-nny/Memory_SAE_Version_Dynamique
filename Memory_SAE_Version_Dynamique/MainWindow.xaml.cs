@@ -54,7 +54,7 @@ namespace Memory_SAE_Version_Dynamique
         }
         public void Initialisation(string difficulteChoisie)
         {
-            int nbLigne = 0;
+            int nbLigne = 0, nbCartes, numImage=0;
 
             if (difficulteChoisie == "Facile")
                 nbLigne = 4;
@@ -62,6 +62,19 @@ namespace Memory_SAE_Version_Dynamique
                 nbLigne = 6;
             else
                 nbLigne = 8;
+            nbCartes = (nbLigne * nbLigne)/2;
+            List<string> images = new List<string>();
+            for (int c  = 0; c < nbCartes; c++)
+            {
+                for (int d = 0; d < 2; d++) 
+                {
+                    images.Add("img/img1 (" + c + ").jpg");
+                }
+            }
+            MelangeImages(images);
+#if DEBUG
+            Console.WriteLine(images.Count);
+#endif
             listeBoutons = new Button[nbLigne, nbLigne];
             for (int i = 0; i < nbLigne; i++)
             {
@@ -71,26 +84,34 @@ namespace Memory_SAE_Version_Dynamique
                 GridJeu.RowDefinitions.Add(ligDef);
                 for (int j = 0; j < nbLigne; j++)
                 {
-                    listeBoutons[i, j] = new Button();
-
-                }
-            }
-
-            for (int c = 0; c < nbLigne; c++)
-            {
-                for (int l = 0; l < nbLigne; l++)
-                {
-                    Grid.SetColumn(listeBoutons[c, l], c);
-                    Grid.SetRow(listeBoutons[c, l], l);
-                }
-            }
-
 #if DEBUG
-            //for (int i = 0; i < listeBoutons.Count; i++)
-            //{
-            //    Console.WriteLine("Debug version \n " + listeBoutons[i] + "\nbouton " + i);
-            //}
+                    Console.WriteLine(numImage);
 #endif
+                    ImageBrush initialisation = new ImageBrush();
+                    initialisation.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + images[numImage]));
+                    listeBoutons[i, j] = new Button() {Background=initialisation } ;
+                    GridJeu.Children.Add(listeBoutons[i, j]);
+                    Grid.SetColumn(listeBoutons[i, j], i);
+                    Grid.SetRow(listeBoutons[i, j],j);
+                    numImage++;
+                }
+            }
+
+
+
+        }
+        private void MelangeImages(List<string> images)
+        {
+            Random random = new Random();
+            int n = images.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = random.Next(n + 1);
+                string value = images[k];
+                images[k] = images[n];
+                images[n] = value;
+            }
         }
     }
 }
