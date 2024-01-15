@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace Memory_SAE_Version_Dynamique
@@ -32,9 +33,15 @@ namespace Memory_SAE_Version_Dynamique
         private List<Button> carteCliqueeCeTour = new List<Button> { };
         private ImageBrush dosCarte = new ImageBrush();
         private int nbLigne;
+        private DispatcherTimer timer;
+        private TimeSpan elapsedTime;
+        private bool isTimerRunning;
+
         public MainWindow()
         {
             InitializeComponent();
+            InitializeTimer();
+            StartTimer();
             bool resultat;
             string difficulteChoisie;
             MessageBoxResult resultatMessageBox = MessageBoxResult.No;
@@ -51,12 +58,50 @@ namespace Memory_SAE_Version_Dynamique
                     this.Close();
                 }
             }
-
             difficulteChoisie = ChoixDifficulte.ComboBoxDifficulté.Text;
             //resultatMessageBox = MessageBoxResult.Yes;
             listeBoutonsDosCarte = Initialisation(difficulteChoisie);
         }
 
+        private void InitializeTimer()
+        {
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick += Timer_Tick;
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            elapsedTime = elapsedTime.Add(TimeSpan.FromSeconds(1));
+            UpdateTimerText();
+        }
+        private void StartTimer()
+        {
+            timer.Start();
+            isTimerRunning = true;
+        }
+
+        private void StopTimer()
+        {
+            timer.Stop();
+            isTimerRunning = false;
+        }
+
+        private void UpdateTimerText()
+        {
+            txtTimer.Text = $"{elapsedTime:mm\\:ss}";
+        }
+        private void StartPauseTimer_Click(object sender, RoutedEventArgs e)
+        {
+            if (isTimerRunning)
+            {
+                StopTimer();
+            }
+            else
+            {
+                StartTimer();
+            }
+        }
         public Button[,] Initialisation(string difficulteChoisie)
         {
             int nbCartes, numImage = 0;
