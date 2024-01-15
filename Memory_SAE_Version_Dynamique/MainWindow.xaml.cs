@@ -35,14 +35,14 @@ namespace Memory_SAE_Version_Dynamique
         private List<Button> dosCarteCliqueeCeTour = new List<Button> { };
         private List<string> carteCliqueeCeTour = new List<string> { };
         private ImageBrush dosCarte = new ImageBrush();
-        private int nbLigne;
         private DispatcherTimer timer;
         private TimeSpan elapsedTime;
         private bool isTimerRunning;
         private int moves;
         private Score currentScore;
-
         private int nbLigne, nbCartes;
+        private List<string> images = new List<string>();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -102,7 +102,7 @@ namespace Memory_SAE_Version_Dynamique
         }
         private void UpdateScoreText()
         {
-            
+
             txtScore.Text = $"Score : {currentScore.CalculateScore()}";
         }
         private void StartPauseTimer_Click(object sender, RoutedEventArgs e)
@@ -119,7 +119,6 @@ namespace Memory_SAE_Version_Dynamique
         public Button[,] Initialisation(string difficulteChoisie)
         {
             int numImage = 0;
-
             if (difficulteChoisie == "Facile")
                 nbLigne = 4;
             else if (difficulteChoisie == "Intermédiaire")
@@ -127,7 +126,7 @@ namespace Memory_SAE_Version_Dynamique
             else
                 nbLigne = 8;
             nbCartes = (nbLigne * nbLigne) / 2;
-            List<string> images = new List<string>();
+            
             for (int c = 0; c < nbCartes; c++)
             {
                 for (int d = 0; d < 2; d++)
@@ -175,7 +174,7 @@ namespace Memory_SAE_Version_Dynamique
 
         private void CliqueCarte(object sender, RoutedEventArgs e)
         {
-            string NomDuBoutonCarte = "";
+            string NomImageCarte = "";
             Button cartecliquee = (Button)sender;
             dosCarteCliqueeCeTour.Add(cartecliquee);
             string NomBouton = cartecliquee.Name;
@@ -183,15 +182,16 @@ namespace Memory_SAE_Version_Dynamique
             {
                 if (NomBouton == "DosBouton" + i)
                 {
-                    NomDuBoutonCarte = "Bouton" + i;
+                    NomImageCarte = images[i];
                 }
             }
-            carteCliqueeCeTour.Add(NomDuBoutonCarte);
+            carteCliqueeCeTour.Add(NomImageCarte);
             cartecliquee.Visibility = Visibility.Hidden;
 #if DEBUG
-            Console.WriteLine(NomDuBoutonCarte);
+            Console.WriteLine(NomImageCarte);
 #endif
             Verification();
+            moves++;
         }
 
         private void MelangeImages(List<string> images)
@@ -207,36 +207,21 @@ namespace Memory_SAE_Version_Dynamique
                 images[n] = value;
             }
         }
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            moves++;
-        }
         private void Verification()
         {
 #if DEBUG
             Console.WriteLine("Nombre de cartes visibles " + dosCarteCliqueeCeTour.Count);
-            Console.WriteLine(carteCliqueeCeTour[0]);
+            for (int i=0;i<carteCliqueeCeTour.Count;i++ )
+                Console.WriteLine("La carte cliquée en position "+i+" est : "+carteCliqueeCeTour[i]);
 #endif
+
             if (dosCarteCliqueeCeTour.Count == 2)
             {
-                for (int i = 0; i < nbLigne; i++)
+                if (carteCliqueeCeTour[0] == carteCliqueeCeTour[1])
                 {
-                    for (int j = 0; j < nbLigne; j++)
-                    {
-                        if (listeBoutons[i, j].Name == carteCliqueeCeTour[0])
-                            premierBouton = listeBoutons[i, j];
-                        if (listeBoutons[i, j].Name == carteCliqueeCeTour[1])
-                            secondBouton = listeBoutons[i, j];
-                    }
+                    //Score++
                 }
-                SolidColorBrush arrierePlan1 = premierBouton.Background as SolidColorBrush;
-                SolidColorBrush arrierePlan2 = secondBouton.Background as SolidColorBrush;
 
-                // Vérifier si les deux arrière-plans sont du type SolidColorBrush
-                if (arrierePlan1.Color.Equals(arrierePlan2.Color))
-                {
-                    // ajout score
-                }
                 else
                 {
                     dosCarteCliqueeCeTour[0].Visibility = Visibility.Visible;
@@ -244,6 +229,7 @@ namespace Memory_SAE_Version_Dynamique
                 }
                 Thread.Sleep(1000);
                 dosCarteCliqueeCeTour.Clear();
+                carteCliqueeCeTour.Clear();
 #if DEBUG
                 Console.WriteLine("Nombre de cartes visibles " + dosCarteCliqueeCeTour.Count);
                 for (int i = 0; i < dosCarteCliqueeCeTour.Count; i++)
