@@ -28,6 +28,8 @@ namespace Memory_SAE_Version_Dynamique
 
         private Button[,] listeBoutons;
         private Button[,] listeBoutonsDosCarte;
+        private List<Button> dosCarteCliqueeCeTour = new List<Button> { };
+        private List<Button> carteCliqueeCeTour = new List<Button> { };
         private ImageBrush dosCarte = new ImageBrush();
         private int nbLigne;
         public MainWindow()
@@ -74,9 +76,9 @@ namespace Memory_SAE_Version_Dynamique
                     images.Add("img/img1 (" + c + ").jpg");
                 }
             }
-            MelangeImages(images);
+            MelangeImages(images) ;
 #if DEBUG
-            Console.WriteLine(images.Count);
+            Console.WriteLine("Nombre d'Images : " + images.Count);
 #endif
             listeBoutons = new Button[nbLigne, nbLigne];
             listeBoutonsDosCarte = new Button[nbLigne, nbLigne];
@@ -89,7 +91,7 @@ namespace Memory_SAE_Version_Dynamique
                 for (int j = 0; j < nbLigne; j++)
                 {
 #if DEBUG
-                    Console.WriteLine(numImage);
+                    Console.WriteLine("Image numéro "+numImage);
 #endif
                     ImageBrush initialisation = new ImageBrush();
                     initialisation.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + images[numImage]));
@@ -112,7 +114,10 @@ namespace Memory_SAE_Version_Dynamique
         private void CliqueCarte(object sender, RoutedEventArgs e)
         {
             Button cartecliquee = (Button)sender;
+            dosCarteCliqueeCeTour.Add(cartecliquee);
+            carteCliqueeCeTour.Add(cartecliquee);
             cartecliquee.Visibility = Visibility.Hidden;
+            Verification();
         }
 
         private void MelangeImages(List<string> images)
@@ -128,6 +133,25 @@ namespace Memory_SAE_Version_Dynamique
                 images[n] = value;
             }
         }
-
+        private void Verification()
+        {
+#if DEBUG
+            Console.WriteLine("Nombre de cartes visibles "+dosCarteCliqueeCeTour.Count);
+#endif
+            if (dosCarteCliqueeCeTour.Count==3)
+            {
+                if (carteCliqueeCeTour[0].Background == carteCliqueeCeTour[1].Background)
+                {
+                    //appel de la fonction Score
+                }
+                else
+                {
+                    dosCarteCliqueeCeTour[0].Visibility = Visibility.Visible;
+                    dosCarteCliqueeCeTour[1].Visibility = Visibility.Visible;
+                }
+                dosCarteCliqueeCeTour.Remove(carteCliqueeCeTour[1]);
+                dosCarteCliqueeCeTour.Remove(carteCliqueeCeTour[0]);
+            }
+        }
     }
 }
