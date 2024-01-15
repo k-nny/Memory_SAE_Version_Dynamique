@@ -91,21 +91,24 @@ namespace Memory_SAE_Version_Dynamique
                 for (int j = 0; j < nbLigne; j++)
                 {
 #if DEBUG
-                    Console.WriteLine("Image numéro "+numImage);
+                    Console.WriteLine("Image numéro " + numImage);
 #endif
                     ImageBrush initialisation = new ImageBrush();
                     initialisation.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + images[numImage]));
-                    listeBoutons[i, j] = new Button() { Background = initialisation };
+                    listeBoutons[i, j] = new Button() { Background = initialisation , Name = "Bouton"+numImage};
                     GridJeu.Children.Add(listeBoutons[i, j]);
                     Grid.SetColumn(listeBoutons[i, j], i);
                     Grid.SetRow(listeBoutons[i, j], j);
                     dosCarte.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/dos_carte.jpg"));
-                    listeBoutonsDosCarte[i, j] = new Button() { Background = dosCarte };
+                    listeBoutonsDosCarte[i, j] = new Button() { Background = dosCarte, Name = "DosBouton"+numImage };
                     listeBoutonsDosCarte[i, j].Click += CliqueCarte;
                     GridJeu.Children.Add(listeBoutonsDosCarte[i, j]);
                     Grid.SetColumn(listeBoutonsDosCarte[i, j], i);
                     Grid.SetRow(listeBoutonsDosCarte[i, j], j);
                     numImage++;
+#if DEBUG
+                    Console.WriteLine(listeBoutons[i, j].Name+"\nNuméro ");
+#endif
                 }
             }
             return listeBoutonsDosCarte;

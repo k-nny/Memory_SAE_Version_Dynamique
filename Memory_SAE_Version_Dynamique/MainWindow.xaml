@@ -9,7 +9,13 @@
     Width="800"
     Height="450"
     mc:Ignorable="d">
-    <Grid
-        x:Name="GridJeu"
-        Margin="0,0,150,0"/>
+    <Grid>
+        <Grid x:Name="GridJeu" Margin="0,0,150,0" />
+        <Canvas>
+            <TextBlock
+                Canvas.Top="10"
+                Canvas.Right="100"
+                Text="TextBlock" />
+        </Canvas>
+    </Grid>
 </Window>
