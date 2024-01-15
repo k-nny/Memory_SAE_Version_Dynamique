@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace Memory_SAE_Version_Dynamique
@@ -34,12 +35,23 @@ namespace Memory_SAE_Version_Dynamique
         private List<Button> dosCarteCliqueeCeTour = new List<Button> { };
         private List<string> carteCliqueeCeTour = new List<string> { };
         private ImageBrush dosCarte = new ImageBrush();
+        private int nbLigne;
+        private DispatcherTimer timer;
+        private TimeSpan elapsedTime;
+        private bool isTimerRunning;
+        private int moves;
+        private Score currentScore;
+
         private int nbLigne, nbCartes;
         public MainWindow()
         {
             InitializeComponent();
+            InitializeTimer();
             bool resultat;
             string difficulteChoisie;
+            moves = 0;
+            currentScore = new Score();
+            UpdateScoreText();
             MessageBoxResult resultatMessageBox = MessageBoxResult.No;
 
             //Creation du menu des difficultés
@@ -54,12 +66,56 @@ namespace Memory_SAE_Version_Dynamique
                     this.Close();
                 }
             }
-
             difficulteChoisie = ChoixDifficulte.ComboBoxDifficulté.Text;
             //resultatMessageBox = MessageBoxResult.Yes;
             listeBoutonsDosCarte = Initialisation(difficulteChoisie);
+            StartTimer();
         }
 
+        private void InitializeTimer()
+        {
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick += Timer_Tick;
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            elapsedTime = elapsedTime.Add(TimeSpan.FromSeconds(1));
+            UpdateTimerText();
+        }
+        private void StartTimer()
+        {
+            timer.Start();
+            isTimerRunning = true;
+        }
+
+        private void StopTimer()
+        {
+            timer.Stop();
+            isTimerRunning = false;
+        }
+
+        private void UpdateTimerText()
+        {
+            txtTimer.Text = $"{elapsedTime:mm\\:ss}";
+        }
+        private void UpdateScoreText()
+        {
+            
+            txtScore.Text = $"Score : {currentScore.CalculateScore()}";
+        }
+        private void StartPauseTimer_Click(object sender, RoutedEventArgs e)
+        {
+            if (isTimerRunning)
+            {
+                StopTimer();
+            }
+            else
+            {
+                StartTimer();
+            }
+        }
         public Button[,] Initialisation(string difficulteChoisie)
         {
             int numImage = 0;
@@ -151,6 +207,10 @@ namespace Memory_SAE_Version_Dynamique
                 images[n] = value;
             }
         }
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            moves++;
+        }
         private void Verification()
         {
 #if DEBUG
@@ -191,6 +251,20 @@ namespace Memory_SAE_Version_Dynamique
                     Console.WriteLine(dosCarteCliqueeCeTour[i]);
                 }
 #endif
+            }
+        }
+        public class Score
+        {
+            public TimeSpan Time { get; set; }
+            public int Moves { get; set; }
+
+            public int CalculateScore()
+            {
+                int timeScore = (int)(10000 / Time.TotalSeconds);
+
+                int movesScore = 1000 - Moves;
+
+                return (int)(0.7 * timeScore + 0.3 * movesScore);
             }
         }
     }
