@@ -10,7 +10,8 @@
     Height="450"
     Background="Black"
     ResizeMode="NoResize"
-    mc:Ignorable="d" WindowStartupLocation="CenterScreen">
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
     <Grid>
         <Canvas x:Name="MyCanvas">
             <Label
@@ -55,7 +56,11 @@
                 VerticalAlignment="Center"
                 Click="ButJouer_Click"
                 Content="Jouer"
-                RenderTransformOrigin="0.5,0.601" />
+                RenderTransformOrigin="0.5,0.601">
+                <Button.Background>
+                    <SolidColorBrush Color="#FFDDDDDD" />
+                </Button.Background>
+            </Button>
             <Button
                 x:Name="ButAnnuler"
                 Canvas.Left="388"
@@ -64,6 +69,7 @@
                 Height="30"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
+                Background="#FFDDDDDD"
                 Click="ButAnnuler_Click"
                 Content="Annuler" />
         </Canvas>
