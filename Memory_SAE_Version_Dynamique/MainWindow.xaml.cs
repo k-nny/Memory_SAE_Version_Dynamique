@@ -39,9 +39,11 @@ namespace Memory_SAE_Version_Dynamique
         private TimeSpan elapsedTime;
         private bool isTimerRunning;
         private int moves;
-        private Score currentScore;
+        //private Score currentScore;
         private int nbLigne, nbCartes;
+        private double score=1000;
         private List<string> images = new List<string>();
+        private List<string> pairesCorrecte = new List<string>();
 
         public MainWindow()
         {
@@ -50,13 +52,10 @@ namespace Memory_SAE_Version_Dynamique
             bool resultat;
             string difficulteChoisie;
             moves = 0;
-            currentScore = new Score();
-            UpdateScoreText();
+            //currentScore = new Score();
+            //UpdateScoreText();
             MessageBoxResult resultatMessageBox = MessageBoxResult.No;
-
-            //Creation du menu des difficultés
             MenuDifficulte ChoixDifficulte = new MenuDifficulte();
-
             resultat = (bool)ChoixDifficulte.ShowDialog();
             if (resultat == false)
             {
@@ -67,7 +66,6 @@ namespace Memory_SAE_Version_Dynamique
                 }
             }
             difficulteChoisie = ChoixDifficulte.ComboBoxDifficulté.Text;
-            //resultatMessageBox = MessageBoxResult.Yes;
             listeBoutonsDosCarte = Initialisation(difficulteChoisie);
             StartTimer();
         }
@@ -100,11 +98,11 @@ namespace Memory_SAE_Version_Dynamique
         {
             txtTimer.Text = $"{elapsedTime:mm\\:ss}";
         }
-        private void UpdateScoreText()
-        {
+        //private void UpdateScoreText()
+        //{
 
-            txtScore.Text = $"Score : {currentScore.CalculateScore()}";
-        }
+        //    txtScore.Text = $"Score : {currentScore.CalculateScore()}";
+        //}
         private void StartPauseTimer_Click(object sender, RoutedEventArgs e)
         {
             if (isTimerRunning)
@@ -118,6 +116,7 @@ namespace Memory_SAE_Version_Dynamique
         }
         public Button[,] Initialisation(string difficulteChoisie)
         {
+            
             int numImage = 0;
             if (difficulteChoisie == "Facile")
                 nbLigne = 4;
@@ -158,7 +157,7 @@ namespace Memory_SAE_Version_Dynamique
                     Grid.SetColumn(listeBoutons[i, j], i);
                     Grid.SetRow(listeBoutons[i, j], j);
                     dosCarte.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/dos_carte.jpg"));
-                    listeBoutonsDosCarte[i, j] = new Button() { Background = dosCarte, Name = "DosBouton" + numImage };
+                    listeBoutonsDosCarte[i, j] = new Button() { Background = dosCarte, Name = "DosBouton" + numImage};
                     listeBoutonsDosCarte[i, j].Click += CliqueCarte;
                     GridJeu.Children.Add(listeBoutonsDosCarte[i, j]);
                     Grid.SetColumn(listeBoutonsDosCarte[i, j], i);
@@ -192,6 +191,7 @@ namespace Memory_SAE_Version_Dynamique
 #endif
             Verification();
             moves++;
+            CalculScore();
         }
 
         private void MelangeImages(List<string> images)
@@ -220,6 +220,8 @@ namespace Memory_SAE_Version_Dynamique
                 if (carteCliqueeCeTour[0] == carteCliqueeCeTour[1])
                 {
                     //Score++
+                    pairesCorrecte.Add(carteCliqueeCeTour[0]);
+                    pairesCorrecte.Add(carteCliqueeCeTour[1]);
                 }
 
                 else
@@ -237,21 +239,35 @@ namespace Memory_SAE_Version_Dynamique
                     Console.WriteLine(dosCarteCliqueeCeTour[i]);
                 }
 #endif
+                if (pairesCorrecte.Count == nbCartes * 2)
+                {
+                    StopTimer();
+                    VictoireDefaite Fin = new VictoireDefaite();
+                    Fin.TexteFinJeu.Text = "Vous avez gagnez !!!";
+                    Fin.ShowDialog();
+                }
             }
+
         }
-        public class Score
+        private void CalculScore()
         {
-            public TimeSpan Time { get; set; }
-            public int Moves { get; set; }
-
-            public int CalculateScore()
-            {
-                int timeScore = (int)(10000 / Time.TotalSeconds);
-
-                int movesScore = 1000 - Moves;
-
-                return (int)(0.7 * timeScore + 0.3 * movesScore);
-            }
+            score = score - (moves * 0.3);
+            txtScore.Text = score.ToString();
         }
+
+        //public class Score
+        //{
+        //    public TimeSpan Time { get; set; }
+        //    public int Moves { get; set; }
+
+        //    public int CalculateScore()
+        //    {
+        //        int timeScore = (int)(10000 / Time.TotalSeconds);
+
+        //        int movesScore = 1000 - Moves;
+
+        //        return (int)(0.7 * timeScore + 0.3 * movesScore);
+        //    }
+        //}
     }
 }
