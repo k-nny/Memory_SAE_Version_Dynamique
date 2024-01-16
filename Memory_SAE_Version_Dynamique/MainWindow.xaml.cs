@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.Metrics;
 using System.Linq;
+using System.Reflection.PortableExecutable;
 using System.Security.Policy;
 using System.Text;
 using System.Threading;
@@ -40,6 +41,7 @@ namespace Memory_SAE_Version_Dynamique
         private TimeSpan elapsedTime;
         private bool isTimerRunning, menuFin, verifier = false;
         private int moves;
+        //private Score currentScore;
         private int nbLigne, nbCartes;
         private double score=1000;
         private List<string> images = new List<string>();
@@ -52,6 +54,8 @@ namespace Memory_SAE_Version_Dynamique
             bool resultat;
             string difficulteChoisie;
             moves = 0;
+            //currentScore = new Score();
+            //UpdateScoreText();
             MessageBoxResult resultatMessageBox = MessageBoxResult.No;
             MenuDifficulte ChoixDifficulte = new MenuDifficulte();
             resultat = (bool)ChoixDifficulte.ShowDialog();
@@ -96,6 +100,11 @@ namespace Memory_SAE_Version_Dynamique
         {
             txtTimer.Text = $"{elapsedTime:mm\\:ss}";
         }
+        //private void UpdateScoreText()
+        //{
+
+        //    txtScore.Text = $"Score : {currentScore.CalculateScore()}";
+        //}
         
         public Button[,] Initialisation(string difficulteChoisie)
         {
@@ -122,6 +131,11 @@ namespace Memory_SAE_Version_Dynamique
 #endif
             listeBoutons = new Button[nbLigne, nbLigne];
             listeBoutonsDosCarte = new Button[nbLigne, nbLigne];
+            ImageBrush pause = new ImageBrush();
+            pause.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/pause.png"));
+            ButPause.Background = pause;
+
+            
             for (int i = 0; i < nbLigne; i++)
             {
                 ColumnDefinition colDef = new ColumnDefinition();
@@ -204,6 +218,7 @@ namespace Memory_SAE_Version_Dynamique
             {     
                 MainWindow mainWindow = new MainWindow();
                 this.Close();
+                mainWindow.ShowDialog();
             }
         }
 
@@ -214,6 +229,7 @@ namespace Memory_SAE_Version_Dynamique
             for (int i=0;i<carteCliqueeCeTour.Count;i++ )
                 Console.WriteLine("La carte cliquée en position "+i+" est : "+carteCliqueeCeTour[i]);
 #endif
+
             if (dosCarteCliqueeCeTour.Count == 2)
             {
                 if (carteCliqueeCeTour[0] == carteCliqueeCeTour[1])
@@ -229,7 +245,7 @@ namespace Memory_SAE_Version_Dynamique
                     dosCarteCliqueeCeTour[1].Visibility = Visibility.Visible;
                     moves++;
                 }
-                Thread.Sleep(1000);
+                Thread.Sleep(200);
                 dosCarteCliqueeCeTour.Clear();
                 carteCliqueeCeTour.Clear();
 #if DEBUG
@@ -281,9 +297,21 @@ namespace Memory_SAE_Version_Dynamique
         }
         private double CalculScore()
         {
-            score = score - (moves * 0.3);
-            txtScore.Text = Math.Round(score,2).ToString();
+            string txtTemps = txtTimer.Text.Substring(3, 2);
+            double coeff, resultat;
+            double.TryParse(txtTemps, out resultat);
+            if (resultat < 10)
+                coeff = 0.1;
+            else if (resultat < 20)
+                coeff = 0.25;
+            else if (resultat < 30)
+                coeff = 0.4;
+            else coeff = 0.6;
+
+            score = score - (moves * coeff);
+            txtScore.Text = Math.Round(score).ToString();
             return score;
         }
+
     }
 }
