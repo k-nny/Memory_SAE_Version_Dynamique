@@ -47,9 +47,6 @@
                 Click="ButReprendre_Click"
                 Content="Reprendre"
                 RenderTransformOrigin="0.5,0.601">
-                <Button.Background>
-                    <SolidColorBrush Color="#FFDDDDDD" />
-                </Button.Background>
             </Button>
             <Button
                 x:Name="ButMenu"

@@ -40,7 +40,6 @@ namespace Memory_SAE_Version_Dynamique
         private TimeSpan elapsedTime;
         private bool isTimerRunning, menuFin, verifier = false;
         private int moves;
-        //private Score currentScore;
         private int nbLigne, nbCartes;
         private double score=1000;
         private List<string> images = new List<string>();
@@ -53,8 +52,6 @@ namespace Memory_SAE_Version_Dynamique
             bool resultat;
             string difficulteChoisie;
             moves = 0;
-            //currentScore = new Score();
-            //UpdateScoreText();
             MessageBoxResult resultatMessageBox = MessageBoxResult.No;
             MenuDifficulte ChoixDifficulte = new MenuDifficulte();
             resultat = (bool)ChoixDifficulte.ShowDialog();
@@ -99,11 +96,6 @@ namespace Memory_SAE_Version_Dynamique
         {
             txtTimer.Text = $"{elapsedTime:mm\\:ss}";
         }
-        //private void UpdateScoreText()
-        //{
-
-        //    txtScore.Text = $"Score : {currentScore.CalculateScore()}";
-        //}
         
         public Button[,] Initialisation(string difficulteChoisie)
         {
@@ -212,7 +204,6 @@ namespace Memory_SAE_Version_Dynamique
             {     
                 MainWindow mainWindow = new MainWindow();
                 this.Close();
-                mainWindow.ShowDialog();
             }
         }
 
@@ -223,7 +214,6 @@ namespace Memory_SAE_Version_Dynamique
             for (int i=0;i<carteCliqueeCeTour.Count;i++ )
                 Console.WriteLine("La carte cliquée en position "+i+" est : "+carteCliqueeCeTour[i]);
 #endif
-
             if (dosCarteCliqueeCeTour.Count == 2)
             {
                 if (carteCliqueeCeTour[0] == carteCliqueeCeTour[1])
@@ -295,20 +285,5 @@ namespace Memory_SAE_Version_Dynamique
             txtScore.Text = Math.Round(score,2).ToString();
             return score;
         }
-
-        //public class Score
-        //{
-        //    public TimeSpan Time { get; set; }
-        //    public int Moves { get; set; }
-
-        //    public int CalculateScore()
-        //    {
-        //        int timeScore = (int)(10000 / Time.TotalSeconds);
-
-        //        int movesScore = 1000 - Moves;
-
-        //        return (int)(0.7 * timeScore + 0.3 * movesScore);
-        //    }
-        //}
     }
 }
