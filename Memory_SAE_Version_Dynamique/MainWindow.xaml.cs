@@ -181,7 +181,6 @@ namespace Memory_SAE_Version_Dynamique
             Console.WriteLine(NomImageCarte);
 #endif
             Verification();
-            moves++;
             CalculScore();
         }
 
@@ -229,7 +228,7 @@ namespace Memory_SAE_Version_Dynamique
             {
                 if (carteCliqueeCeTour[0] == carteCliqueeCeTour[1])
                 {
-                    //Score++
+                    score += 10; 
                     pairesCorrecte.Add(carteCliqueeCeTour[0]);
                     pairesCorrecte.Add(carteCliqueeCeTour[1]);
                 }
@@ -238,6 +237,7 @@ namespace Memory_SAE_Version_Dynamique
                 {
                     dosCarteCliqueeCeTour[0].Visibility = Visibility.Visible;
                     dosCarteCliqueeCeTour[1].Visibility = Visibility.Visible;
+                    moves++;
                 }
                 Thread.Sleep(1000);
                 dosCarteCliqueeCeTour.Clear();
