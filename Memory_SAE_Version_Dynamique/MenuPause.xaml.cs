@@ -15,24 +15,23 @@ using System.Windows.Shapes;
 namespace Memory_SAE_Version_Dynamique
 {
     /// <summary>
-    /// Logique d'interaction pour VictoireDefaite.xaml
+    /// Logique d'interaction pour MenuPause.xaml
     /// </summary>
-    public partial class VictoireDefaite : Window
+    public partial class MenuPause : Window
     {
-        public VictoireDefaite()
+        public MenuPause()
         {
             InitializeComponent();
         }
 
-
-        private void ButRejouer_Click(object sender, RoutedEventArgs e)
+        private void ButReprendre_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = true;
+            this.DialogResult = true;
         }
 
         private void ButMenu_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = false;
+            this.DialogResult = false;
         }
     }
 }

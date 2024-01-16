@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -37,7 +38,7 @@ namespace Memory_SAE_Version_Dynamique
         private ImageBrush dosCarte = new ImageBrush();
         private DispatcherTimer timer;
         private TimeSpan elapsedTime;
-        private bool isTimerRunning;
+        private bool isTimerRunning, menuFin, verifier = false;
         private int moves;
         //private Score currentScore;
         private int nbLigne, nbCartes;
@@ -103,17 +104,7 @@ namespace Memory_SAE_Version_Dynamique
 
         //    txtScore.Text = $"Score : {currentScore.CalculateScore()}";
         //}
-        private void StartPauseTimer_Click(object sender, RoutedEventArgs e)
-        {
-            if (isTimerRunning)
-            {
-                StopTimer();
-            }
-            else
-            {
-                StartTimer();
-            }
-        }
+        
         public Button[,] Initialisation(string difficulteChoisie)
         {
             
@@ -207,6 +198,25 @@ namespace Memory_SAE_Version_Dynamique
                 images[n] = value;
             }
         }
+
+        private void ButPause_Click(object sender, RoutedEventArgs e)
+        {
+            StopTimer();
+            MenuPause menuPause = new MenuPause();
+            bool menuPauseResultat = (bool)menuPause.ShowDialog();
+            if (menuPauseResultat == true )
+            {
+                menuPause.Close();
+                StartTimer();
+            }
+            else
+            {     
+                MainWindow mainWindow = new MainWindow();
+                this.Close();
+                mainWindow.ShowDialog();
+            }
+        }
+
         private void Verification()
         {
 #if DEBUG
@@ -238,21 +248,52 @@ namespace Memory_SAE_Version_Dynamique
                 {
                     Console.WriteLine(dosCarteCliqueeCeTour[i]);
                 }
-#endif
-                if (pairesCorrecte.Count == nbCartes * 2)
+                Console.WriteLine("Score : " + CalculScore());
+#endif 
+            }
+            VictoireDefaite Fin = new VictoireDefaite();
+            
+            if (pairesCorrecte.Count == nbCartes * 2)
+            {
+                StopTimer();
+                Fin.LabResultat.Text = "Vous avez gagnez !!!";
+                this.Close();
+                menuFin = (bool)Fin.ShowDialog();
+                verifier = true;
+            }
+            else if (CalculScore() <= 0)
+            {
+                StopTimer();
+                Fin.LabResultat.Text = "Vous avez perdu car votre score est inférieur à zéro !!!";
+                this.Close();
+                menuFin = (bool)Fin.ShowDialog();
+                verifier = true;
+            }
+            if (verifier ==  true)
+            {
+                if (menuFin == false)
                 {
-                    StopTimer();
-                    VictoireDefaite Fin = new VictoireDefaite();
-                    Fin.TexteFinJeu.Text = "Vous avez gagnez !!!";
-                    Fin.ShowDialog();
+                    Fin.Close();
+                    MessageBoxResult resultatMessageBoxFin = MessageBoxResult.No;
+                    resultatMessageBoxFin = MessageBox.Show("Vous venez de quitter le meilleur jeu de mémoire de 2024", "Information Annulation", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    if (resultatMessageBoxFin == MessageBoxResult.OK)
+                    {
+                        this.Close();
+                    }
+                }
+                else
+                {
+                    MainWindow mainWindowRejouer = new MainWindow();
+                    this.Close();
+                    mainWindowRejouer.ShowDialog();
                 }
             }
-
         }
-        private void CalculScore()
+        private double CalculScore()
         {
             score = score - (moves * 0.3);
-            txtScore.Text = score.ToString();
+            txtScore.Text = Math.Round(score,2).ToString();
+            return score;
         }
 
         //public class Score

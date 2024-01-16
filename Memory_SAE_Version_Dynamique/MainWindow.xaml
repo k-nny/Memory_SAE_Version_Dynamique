@@ -18,15 +18,14 @@
                 Canvas.Right="50"
                 FontSize="24"
                 Text="00:00" />
-            <Button
+            <Button x:Name="ButPause"
                 Canvas.Top="78"
                 Canvas.Right="25"
                 Width="104"
                 Height="40"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
-                Click="StartPauseTimer_Click"
-                Content="Start/Pause" />
+                Content="Menu Pause" Click="ButPause_Click" />
             <TextBlock
                 x:Name="txtScore"
                 Canvas.Top="201"
