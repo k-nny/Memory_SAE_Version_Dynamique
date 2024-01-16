@@ -48,7 +48,10 @@ namespace Memory_SAE_Version_Dynamique
 
         public MainWindow()
         {
+            ImageBrush pause = new ImageBrush();
+            pause.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/pause.png"));
             InitializeComponent();
+            ButPause.Background = pause;
             InitializeTimer();
             bool resultat;
             string difficulteChoisie;
@@ -122,12 +125,7 @@ namespace Memory_SAE_Version_Dynamique
             Console.WriteLine("Nombre d'Images : " + images.Count);
 #endif
             listeBoutons = new Button[nbLigne, nbLigne];
-            listeBoutonsDosCarte = new Button[nbLigne, nbLigne];
-            ImageBrush pause = new ImageBrush();
-            pause.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/pause.png"));
-            ButPause.Background = pause;
-
-            
+            listeBoutonsDosCarte = new Button[nbLigne, nbLigne];          
             for (int i = 0; i < nbLigne; i++)
             {
                 ColumnDefinition colDef = new ColumnDefinition();
