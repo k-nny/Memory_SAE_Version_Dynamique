@@ -9,38 +9,64 @@
     Width="800"
     Height="450"
     mc:Ignorable="d">
-    <Grid>
-        <Grid x:Name="GridJeu" Margin="0,0,150,0" />
-        <Canvas Margin="650,0,0,0">
+    <Grid  Background="#FF010153">
+        <Grid x:Name="GridJeu" Margin="0,0,150,0"  />
+        <Canvas Margin="650,0,0,0" Background="#FF010153">
             <TextBlock
                 x:Name="txtTimer"
                 Canvas.Top="25"
                 Canvas.Right="50"
-                FontSize="24"
+                FontFamily="Viner Hand ITC"
+                FontSize="30"
+                Foreground="#FF00FDFD"
                 Text="00:00" />
-            <Button x:Name="ButPause"
-                Canvas.Top="78"
+            <Button
+                x:Name="ButPause"
+                Canvas.Top="74"
                 Canvas.Right="25"
-                Width="104"
-                Height="40"
+                Width="69"
+                Height="69"
                 HorizontalAlignment="Left"
-                VerticalAlignment="Center"
-                Content="Menu Pause" Click="ButPause_Click" />
+                VerticalAlignment="Top"
+                Click="ButPause_Click"
+                Content=""
+                RenderTransformOrigin="0.5,0.5" Canvas.Left="44">
+                <Button.Background>
+                    <ImageBrush ImageSource="/img/pause.png"/>
+                </Button.Background>
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform />
+                        <SkewTransform />
+                        <RotateTransform Angle="-0.358" />
+                        <TranslateTransform />
+                    </TransformGroup>
+                </Button.RenderTransform>
+
+
+
+            </Button>
             <TextBlock
                 x:Name="txtScore"
                 Canvas.Top="201"
                 Canvas.Right="50"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Top"
-                FontSize="24"
+                FontFamily="Chiller"
+                FontSize="40"
+                Foreground="#FFFF0011"
                 Text="1000" />
             <TextBlock
                 x:Name="txtScore_Copy"
-                Canvas.Top="152"
+                Canvas.Top="148"
                 Canvas.Right="33"
+                Width="116"
+                Height="40"
                 HorizontalAlignment="Left"
-                VerticalAlignment="Center"
-                FontSize="24"
+                VerticalAlignment="Top"
+                FontFamily="Viner Hand ITC"
+                FontSize="30"
+                Foreground="#FF0BCFCF"
                 Text="SCORE : " />
         </Canvas>
     </Grid>
