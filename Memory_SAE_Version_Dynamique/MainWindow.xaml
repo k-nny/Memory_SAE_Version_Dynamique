@@ -8,14 +8,15 @@
     Title="MainWindow"
     Width="800"
     Height="450"
-    mc:Ignorable="d" WindowState="Maximized">
+    WindowState="Maximized"
+    mc:Ignorable="d">
     <Grid Background="#FF010153">
         <Grid x:Name="GridJeu" Margin="0,0,150,0" />
         <Canvas Margin="650,0,0,0">
             <TextBlock
                 x:Name="txtTimer"
                 Canvas.Top="25"
-                Canvas.Right="50"
+                Canvas.Right="45"
                 FontFamily="Viner Hand ITC"
                 FontSize="30"
                 Foreground="#FF00FDFD"
@@ -23,12 +24,15 @@
             <Button
                 x:Name="ButPause"
                 Canvas.Top="74"
-                Canvas.Right="40"
+                Canvas.Right="28
+                
+                "
                 Width="89"
                 Height="39"
+                BorderBrush="#FF010153"
                 Click="ButPause_Click"
                 Content=""
-                RenderTransformOrigin="0.5,0.5" BorderBrush="#FF010153">
+                RenderTransformOrigin="0.5,0.5">
                 <Button.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform />
@@ -44,7 +48,7 @@
             <TextBlock
                 x:Name="txtScore"
                 Canvas.Top="201"
-                Canvas.Right="50"
+                Canvas.Right="40"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Top"
                 FontFamily="Chiller"
@@ -52,10 +56,9 @@
                 Foreground="#FFFF0011"
                 Text="1000" />
             <TextBlock
-              
                 x:Name="txtScore_Copy"
                 Canvas.Top="148"
-                Canvas.Right="33"
+                Canvas.Right="19"
                 Width="116"
                 Height="40"
                 HorizontalAlignment="Left"

@@ -302,12 +302,12 @@ namespace Memory_SAE_Version_Dynamique
             double coeff, resultat;
             double.TryParse(txtTemps, out resultat);
             if (resultat < 10)
-                coeff = 0.1;
-            else if (resultat < 20)
                 coeff = 0.25;
-            else if (resultat < 30)
+            else if (resultat < 20)
                 coeff = 0.4;
-            else coeff = 0.6;
+            else if (resultat < 30)
+                coeff = 0.6;
+            else coeff = 0.8;
 
             score = score - (moves * coeff);
             txtScore.Text = Math.Round(score).ToString();
