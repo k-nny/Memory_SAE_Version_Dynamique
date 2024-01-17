@@ -8,7 +8,7 @@
     Title="MainWindow"
     Width="800"
     Height="450"
-    mc:Ignorable="d">
+    mc:Ignorable="d" WindowState="Maximized">
     <Grid Background="#FF010153">
         <Grid x:Name="GridJeu" Margin="0,0,150,0" />
         <Canvas Margin="650,0,0,0">
@@ -63,7 +63,11 @@
                 FontFamily="Viner Hand ITC"
                 FontSize="30"
                 Foreground="#FF0BCFCF"
+<<<<<<< HEAD
                 Text="SCORE : " Margin="0,0,-15,0" />
+=======
+                Text="SCORE : " />
+>>>>>>> 94931b2eefe13bd70bfb87077b7e61ab2b5fa29a
             <Rectangle
                 x:Name="RectVerifFin"
                 Canvas.Left="139"
