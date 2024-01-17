@@ -16,53 +16,76 @@
         <Canvas x:Name="MyCanvas">
             <Label
                 x:Name="LabDifficulte"
-                Canvas.Left="155"
-                Canvas.Top="197"
+                Canvas.Left="161"
+                Canvas.Top="234"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
                 Content="Difficulté : "
+                FontFamily="Viner Hand ITC"
+                FontSize="20"
                 FontWeight="Bold"
                 Foreground="White" />
             <ComboBox
                 x:Name="ComboBoxDifficulté"
-                Canvas.Left="272"
-                Canvas.Top="199"
-                Width="196"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Center">
+                Canvas.Left="325"
+                Canvas.Top="242"
+                Width="142"
+                Height="27"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Background="Black"
+                FontFamily="Viner Hand ITC"
+                FontSize="16">
+
                 <ComboBoxItem
                     x:Name="CombItemFacile"
                     Content="Facile"
+                    FontFamily="Viner Hand ITC"
+                    FontSize="16"
                     IsSelected="True" />
-                <ComboBoxItem x:Name="CombItemInter" Content="Intermédiaire" />
-                <ComboBoxItem x:Name="CombItemDifficile" Content="Difficile" />
+                <ComboBoxItem
+                    x:Name="CombItemInter"
+                    Content="Intermédiaire"
+                    FontFamily="Viner Hand ITC"
+                    FontSize="16"
+                    IsSelected="True" />
+                <ComboBoxItem
+                    x:Name="CombItemDifficile"
+                    Content="Difficile"
+                    FontFamily="Viner Hand ITC"
+                    FontSize="16"
+                    IsSelected="True" />
             </ComboBox>
             <Button
                 x:Name="ButJouer"
-                Canvas.Left="155"
-                Canvas.Top="309"
-                Width="80"
-                Height="30"
+                Canvas.Left="161"
+                Canvas.Top="324"
+                Width="99"
+                Height="48"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 Click="ButJouer_Click"
-                Content="Jouer"
-                RenderTransformOrigin="0.5,0.601">
-                <Button.Background>
-                    <SolidColorBrush Color="#FFDDDDDD" />
-                </Button.Background>
-            </Button>
+                RenderTransformOrigin="0.5,0.601" />
             <Button
                 x:Name="ButAnnuler"
-                Canvas.Left="388"
-                Canvas.Top="309"
-                Width="80"
-                Height="30"
-                HorizontalAlignment="Center"
+                Canvas.Left="383"
+                Canvas.Top="324"
+                Width="111"
+                Height="48"
+                HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 Background="#FFDDDDDD"
                 Click="ButAnnuler_Click"
                 Content="Annuler" />
         </Canvas>
-        <Rectangle x:Name="rectLogo" HorizontalAlignment="Left" Height="100" Margin="177,71,0,0" VerticalAlignment="Top" Width="316" Fill="#FFFF0404"/>
+        <Rectangle
+            x:Name="rectLogo"
+            Width="576"
+            Height="207"
+            Margin="0,10,0,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Fill="#FFFF0404" />
 
     </Grid>
 </Window>

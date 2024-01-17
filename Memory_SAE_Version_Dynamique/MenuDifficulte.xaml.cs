@@ -40,5 +40,7 @@ namespace Memory_SAE
         {
             this.DialogResult = false;
         }
+
+
     }
 }

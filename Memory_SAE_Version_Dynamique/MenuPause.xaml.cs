@@ -22,6 +22,9 @@ namespace Memory_SAE_Version_Dynamique
         public MenuPause()
         {
             InitializeComponent();
+            ImageBrush logo = new ImageBrush();
+            logo.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/Memory_Card_Game_Logo.jpg"));
+            rectLogo.Fill = logo;
         }
 
         private void ButReprendre_Click(object sender, RoutedEventArgs e)
