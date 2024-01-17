@@ -11,7 +11,7 @@
     KeyDown="Window_KeyDown"
     KeyUp="Window_KeyUp"
     WindowState="Maximized"
-    mc:Ignorable="d" KeyDown="Window_KeyDown" KeyUp="Window_KeyUp">
+    mc:Ignorable="d" >
     <Grid Background="#FF010153">
         <Grid x:Name="GridJeu" Margin="0,0,150,0" />
         <Canvas Margin="650,0,0,0">
