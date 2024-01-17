@@ -45,6 +45,8 @@ namespace Memory_SAE_Version_Dynamique
         private double score = 1000;
         private List<string> images = new List<string>();
         private List<string> pairesCorrecte = new List<string>();
+        private List<Rectangle> pairesCorrecteDos = new List<Rectangle>();
+        Key tricher = Key.K;
 
         public MainWindow()
         {
@@ -183,6 +185,35 @@ namespace Memory_SAE_Version_Dynamique
             Verification();
         }
 
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if ((e.Key == tricher))
+            {
+                for (int i = 0; i < nbLigne; i++)
+                {
+                    for (int j = 0; j < nbLigne; j++)
+                    {
+                        listeBoutonsDosCarte[i, j].Visibility = Visibility.Hidden;
+                    }
+                }
+            }
+        }
+
+        private void Window_KeyUp(object sender, KeyEventArgs e)
+        {
+            if ((e.Key == tricher))
+            {
+                for (int i = 0; i < nbLigne; i++)
+                {
+                    for (int j = 0; j < nbLigne; j++)
+                    {
+                        if (!pairesCorrecteDos.Contains(listeBoutonsDosCarte[i,j]))
+                            listeBoutonsDosCarte[i, j].Visibility = Visibility.Visible;
+                    }
+                }
+            }
+        }
+
         private void MelangeImages(List<string> images)
         {
             Random random = new Random();
@@ -238,6 +269,8 @@ namespace Memory_SAE_Version_Dynamique
                     score += 10;
                     pairesCorrecte.Add(carteCliqueeCeTour[0]);
                     pairesCorrecte.Add(carteCliqueeCeTour[1]);
+                    pairesCorrecteDos.Add(dosCarteCliqueeCeTour[0]);
+                    pairesCorrecteDos.Add(dosCarteCliqueeCeTour[1]);
                 }
 
                 else

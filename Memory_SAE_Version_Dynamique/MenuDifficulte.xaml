@@ -47,14 +47,12 @@
                     x:Name="CombItemInter"
                     Content="Intermédiaire"
                     FontFamily="Viner Hand ITC"
-                    FontSize="16"
-                    IsSelected="True" />
+                    FontSize="16" />
                 <ComboBoxItem
                     x:Name="CombItemDifficile"
                     Content="Difficile"
                     FontFamily="Viner Hand ITC"
-                    FontSize="16"
-                    IsSelected="True" />
+                    FontSize="16" />
             </ComboBox>
             <Button
                 x:Name="ButJouer"

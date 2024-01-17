@@ -27,7 +27,7 @@ namespace Memory_SAE
             logo.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/Memory_Card_Game_Logo.jpg"));
             rectLogo.Fill = logo;
             ImageBrush jouer = new ImageBrush();
-            jouer.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/play.png"));
+            jouer.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/jouer.png"));
             ButJouer.Background = jouer;
         }
 
