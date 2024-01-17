@@ -42,7 +42,7 @@ namespace Memory_SAE_Version_Dynamique
         private bool isTimerRunning, menuFin, verifier = false;
         private int moves;
         private int nbLigne, nbCartes;
-        private double score=1000;
+        private double score = 1000;
         private List<string> images = new List<string>();
         private List<string> pairesCorrecte = new List<string>();
 
@@ -97,7 +97,7 @@ namespace Memory_SAE_Version_Dynamique
         {
             txtTimer.Text = $"{elapsedTime:mm\\:ss}";
         }
-        
+
         public Rectangle[,] Initialisation(string difficulteChoisie)
         {
             ImageBrush pause = new ImageBrush();
@@ -109,9 +109,12 @@ namespace Memory_SAE_Version_Dynamique
             else if (difficulteChoisie == "Intermédiaire")
                 nbLigne = 6;
             else
+            {
                 nbLigne = 8;
+                score = 1500;
+            }
             nbCartes = (nbLigne * nbLigne) / 2;
-            
+
             for (int c = 0; c < nbCartes; c++)
             {
                 for (int d = 0; d < 2; d++)
@@ -124,7 +127,7 @@ namespace Memory_SAE_Version_Dynamique
             Console.WriteLine("Nombre d'Images : " + images.Count);
 #endif
             listeBoutons = new Button[nbLigne, nbLigne];
-            listeBoutonsDosCarte = new Rectangle[nbLigne, nbLigne];          
+            listeBoutonsDosCarte = new Rectangle[nbLigne, nbLigne];
             for (int i = 0; i < nbLigne; i++)
             {
                 ColumnDefinition colDef = new ColumnDefinition();
@@ -143,7 +146,7 @@ namespace Memory_SAE_Version_Dynamique
                     Grid.SetColumn(listeBoutons[i, j], i);
                     Grid.SetRow(listeBoutons[i, j], j);
                     dosCarte.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/dos_carte.jpg"));
-                    listeBoutonsDosCarte[i, j] = new Rectangle() {Name = "DosBouton" + numImage};
+                    listeBoutonsDosCarte[i, j] = new Rectangle() { Name = "DosBouton" + numImage };
                     listeBoutonsDosCarte[i, j].Fill = dosCarte;
                     listeBoutonsDosCarte[i, j].MouseLeftButtonDown += CliqueCarte;
                     GridJeu.Children.Add(listeBoutonsDosCarte[i, j]);
@@ -161,7 +164,7 @@ namespace Memory_SAE_Version_Dynamique
         {
             string NomImageCarte = "";
             Rectangle cartecliquee = (Rectangle)sender;
-            cartecliquee.Visibility = Visibility.Hidden;   
+            cartecliquee.Visibility = Visibility.Hidden;
             dosCarteCliqueeCeTour.Add(cartecliquee);
             string NomBouton = cartecliquee.Name;
 
@@ -173,12 +176,11 @@ namespace Memory_SAE_Version_Dynamique
                 }
             }
             carteCliqueeCeTour.Add(NomImageCarte);
-            
+
 #if DEBUG
             Console.WriteLine(NomImageCarte);
 #endif
             Verification();
-            CalculScore();
         }
 
         private void MelangeImages(List<string> images)
@@ -200,14 +202,14 @@ namespace Memory_SAE_Version_Dynamique
             StopTimer();
             MenuPause menuPause = new MenuPause();
             bool menuPauseResultat = (bool)menuPause.ShowDialog();
-            if (menuPauseResultat == true )
+            if (menuPauseResultat == false)
             {
                 menuPause.Close();
                 StartTimer();
             }
             else
             {
-                
+
                 MainWindow mainWindow = new MainWindow();
                 this.Close();
                 mainWindow.Show();
@@ -218,21 +220,21 @@ namespace Memory_SAE_Version_Dynamique
         {
 #if DEBUG
             Console.WriteLine("Nombre de cartes visibles " + dosCarteCliqueeCeTour.Count);
-            for (int i=0;i<carteCliqueeCeTour.Count;i++ )
-                Console.WriteLine("La carte cliquée en position "+i+" est : "+carteCliqueeCeTour[i]);
+            for (int i = 0; i < carteCliqueeCeTour.Count; i++)
+                Console.WriteLine("La carte cliquée en position " + i + " est : " + carteCliqueeCeTour[i]);
 #endif
             if (pairesCorrecte.Count == nbCartes * 2 - 2 && carteCliqueeCeTour.Count == 2)
             {
                 carteCliqueeCeTour.Insert(2, "");
                 dosCarteCliqueeCeTour.Add(RectVerifFin);
             }
-            
+
             if (carteCliqueeCeTour.Count == 3)
             {
                 Thread.Sleep(200);
                 if (carteCliqueeCeTour[0] == carteCliqueeCeTour[1])
                 {
-                    score += 10; 
+                    score += 10;
                     pairesCorrecte.Add(carteCliqueeCeTour[0]);
                     pairesCorrecte.Add(carteCliqueeCeTour[1]);
                 }
@@ -242,6 +244,7 @@ namespace Memory_SAE_Version_Dynamique
                     dosCarteCliqueeCeTour[0].Visibility = Visibility.Visible;
                     dosCarteCliqueeCeTour[1].Visibility = Visibility.Visible;
                     moves++;
+                    CalculScore();
                 }
                 dosCarteCliqueeCeTour[2].Visibility = Visibility.Visible;
                 dosCarteCliqueeCeTour.Clear();
@@ -252,29 +255,29 @@ namespace Memory_SAE_Version_Dynamique
                 {
                     Console.WriteLine(dosCarteCliqueeCeTour[i]);
                 }
-                Console.WriteLine("Score : " + CalculScore());
+                Console.WriteLine("Score : " + score);
 #endif 
             }
             VictoireDefaite Fin = new VictoireDefaite();
-            
+
             if (pairesCorrecte.Count == nbCartes * 2)
             {
                 StopTimer();
                 Fin.LabResultat.Text = "Vous avez gagnez !!!";
                 this.Close();
-                menuFin = (bool)Fin.ShowDialog();
                 verifier = true;
             }
-            else if (CalculScore() <= 0)
+            else if (score <= 0)
             {
                 StopTimer();
                 Fin.LabResultat.Text = "Vous avez perdu car votre score est inférieur à zéro !!!";
                 this.Close();
-                menuFin = (bool)Fin.ShowDialog();
                 verifier = true;
             }
-            if (verifier ==  true)
+            if (verifier == true)
             {
+                Fin.LabResultatScore.Text = "Votre score est de " + Math.Round(score);
+                menuFin = (bool)Fin.ShowDialog();
                 if (menuFin == false)
                 {
                     Fin.Close();

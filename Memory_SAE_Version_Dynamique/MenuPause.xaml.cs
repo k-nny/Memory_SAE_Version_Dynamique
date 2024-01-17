@@ -26,12 +26,12 @@ namespace Memory_SAE_Version_Dynamique
 
         private void ButReprendre_Click(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = true;
+            this.DialogResult = false;
         }
 
         private void ButMenu_Click(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = false;
+            this.DialogResult = true;
         }
     }
 }
