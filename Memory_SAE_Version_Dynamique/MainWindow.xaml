@@ -9,8 +9,8 @@
     Width="800"
     Height="450"
     mc:Ignorable="d">
-    <Grid  Background="#FF010153">
-        <Grid x:Name="GridJeu" Margin="0,0,150,0"  />
+    <Grid Background="#FF010153">
+        <Grid x:Name="GridJeu" Margin="0,0,150,0" />
         <Canvas Margin="650,0,0,0" Background="#FF010153">
             <TextBlock
                 x:Name="txtTimer"
@@ -23,17 +23,14 @@
             <Button
                 x:Name="ButPause"
                 Canvas.Top="74"
-                Canvas.Right="25"
+                Canvas.Right="40"
                 Width="69"
                 Height="69"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Click="ButPause_Click"
                 Content=""
-                RenderTransformOrigin="0.5,0.5" Canvas.Left="44">
-                <Button.Background>
-                    <ImageBrush ImageSource="/img/pause.png"/>
-                </Button.Background>
+                RenderTransformOrigin="0.5,0.5">
                 <Button.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform />

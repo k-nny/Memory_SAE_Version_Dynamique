@@ -32,9 +32,9 @@ namespace Memory_SAE_Version_Dynamique
 
 
         private Button[,] listeBoutons;
-        private Button[,] listeBoutonsDosCarte;
+        private Rectangle[,] listeBoutonsDosCarte;
         private Button premierBouton, secondBouton;
-        private List<Button> dosCarteCliqueeCeTour = new List<Button> { };
+        private List<Rectangle> dosCarteCliqueeCeTour = new List<Rectangle> { };
         private List<string> carteCliqueeCeTour = new List<string> { };
         private ImageBrush dosCarte = new ImageBrush();
         private DispatcherTimer timer;
@@ -48,10 +48,7 @@ namespace Memory_SAE_Version_Dynamique
 
         public MainWindow()
         {
-            ImageBrush pause = new ImageBrush();
-            pause.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/pause.png"));
             InitializeComponent();
-            ButPause.Background = pause;
             InitializeTimer();
             bool resultat;
             string difficulteChoisie;
@@ -101,9 +98,11 @@ namespace Memory_SAE_Version_Dynamique
             txtTimer.Text = $"{elapsedTime:mm\\:ss}";
         }
         
-        public Button[,] Initialisation(string difficulteChoisie)
+        public Rectangle[,] Initialisation(string difficulteChoisie)
         {
-            
+            ImageBrush pause = new ImageBrush();
+            pause.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/pause.jpg"));
+            this.ButPause.Background = pause;
             int numImage = 0;
             if (difficulteChoisie == "Facile")
                 nbLigne = 4;
@@ -125,7 +124,7 @@ namespace Memory_SAE_Version_Dynamique
             Console.WriteLine("Nombre d'Images : " + images.Count);
 #endif
             listeBoutons = new Button[nbLigne, nbLigne];
-            listeBoutonsDosCarte = new Button[nbLigne, nbLigne];          
+            listeBoutonsDosCarte = new Rectangle[nbLigne, nbLigne];          
             for (int i = 0; i < nbLigne; i++)
             {
                 ColumnDefinition colDef = new ColumnDefinition();
@@ -144,8 +143,9 @@ namespace Memory_SAE_Version_Dynamique
                     Grid.SetColumn(listeBoutons[i, j], i);
                     Grid.SetRow(listeBoutons[i, j], j);
                     dosCarte.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/dos_carte.jpg"));
-                    listeBoutonsDosCarte[i, j] = new Button() { Background = dosCarte, Name = "DosBouton" + numImage};
-                    listeBoutonsDosCarte[i, j].Click += CliqueCarte;
+                    listeBoutonsDosCarte[i, j] = new Rectangle() {Name = "DosBouton" + numImage};
+                    listeBoutonsDosCarte[i, j].Fill = dosCarte;
+                    listeBoutonsDosCarte[i, j].MouseLeftButtonDown += CliqueCarte;
                     GridJeu.Children.Add(listeBoutonsDosCarte[i, j]);
                     Grid.SetColumn(listeBoutonsDosCarte[i, j], i);
                     Grid.SetRow(listeBoutonsDosCarte[i, j], j);
@@ -157,13 +157,14 @@ namespace Memory_SAE_Version_Dynamique
             }
             return listeBoutonsDosCarte;
         }
-
         private void CliqueCarte(object sender, RoutedEventArgs e)
         {
             string NomImageCarte = "";
-            Button cartecliquee = (Button)sender;
+            Rectangle cartecliquee = (Rectangle)sender;
+            cartecliquee.Visibility = Visibility.Hidden;   
             dosCarteCliqueeCeTour.Add(cartecliquee);
             string NomBouton = cartecliquee.Name;
+
             for (int i = 0; i < nbCartes * 2; i++)
             {
                 if (NomBouton == "DosBouton" + i)
@@ -172,7 +173,7 @@ namespace Memory_SAE_Version_Dynamique
                 }
             }
             carteCliqueeCeTour.Add(NomImageCarte);
-            cartecliquee.Visibility = Visibility.Hidden;
+            
 #if DEBUG
             Console.WriteLine(NomImageCarte);
 #endif
@@ -205,9 +206,11 @@ namespace Memory_SAE_Version_Dynamique
                 StartTimer();
             }
             else
-            {     
+            {
+                
                 MainWindow mainWindow = new MainWindow();
                 this.Close();
+                mainWindow.Show();
             }
         }
 
@@ -218,8 +221,12 @@ namespace Memory_SAE_Version_Dynamique
             for (int i=0;i<carteCliqueeCeTour.Count;i++ )
                 Console.WriteLine("La carte cliquée en position "+i+" est : "+carteCliqueeCeTour[i]);
 #endif
-            if (dosCarteCliqueeCeTour.Count == 2)
+            if (pairesCorrecte.Count == nbCartes * 2-2)
+                carteCliqueeCeTour.Add("");
+            
+            if (carteCliqueeCeTour.Count == 3)
             {
+                Thread.Sleep(200);
                 if (carteCliqueeCeTour[0] == carteCliqueeCeTour[1])
                 {
                     score += 10; 
@@ -233,7 +240,6 @@ namespace Memory_SAE_Version_Dynamique
                     dosCarteCliqueeCeTour[1].Visibility = Visibility.Visible;
                     moves++;
                 }
-                Thread.Sleep(200);
                 dosCarteCliqueeCeTour.Clear();
                 carteCliqueeCeTour.Clear();
 #if DEBUG
