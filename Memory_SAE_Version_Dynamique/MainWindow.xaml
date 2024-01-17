@@ -9,7 +9,7 @@
     Width="800"
     Height="450"
     WindowState="Maximized"
-    mc:Ignorable="d">
+    mc:Ignorable="d" KeyDown="Window_KeyDown" KeyUp="Window_KeyUp">
     <Grid Background="#FF010153">
         <Grid x:Name="GridJeu" Margin="0,0,150,0" />
         <Canvas Margin="650,0,0,0">
@@ -66,10 +66,6 @@
                 FontSize="30"
                 Foreground="#FF0BCFCF"
                 Text="SCORE : " />
-<<<<<<< HEAD
-
-=======
->>>>>>> ba0102d1fb9c7a465b26dab4a5ac6f4e9f12a743
             <Rectangle
                 x:Name="RectVerifFin"
                 Canvas.Left="139"
