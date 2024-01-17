@@ -221,8 +221,11 @@ namespace Memory_SAE_Version_Dynamique
             for (int i=0;i<carteCliqueeCeTour.Count;i++ )
                 Console.WriteLine("La carte cliquée en position "+i+" est : "+carteCliqueeCeTour[i]);
 #endif
-            if (pairesCorrecte.Count == nbCartes * 2-2)
-                carteCliqueeCeTour.Add("");
+            if (pairesCorrecte.Count == nbCartes * 2 - 2 && carteCliqueeCeTour.Count == 2)
+            {
+                carteCliqueeCeTour.Insert(2, "");
+                dosCarteCliqueeCeTour.Add(RectVerifFin);
+            }
             
             if (carteCliqueeCeTour.Count == 3)
             {
@@ -240,6 +243,7 @@ namespace Memory_SAE_Version_Dynamique
                     dosCarteCliqueeCeTour[1].Visibility = Visibility.Visible;
                     moves++;
                 }
+                dosCarteCliqueeCeTour[2].Visibility = Visibility.Visible;
                 dosCarteCliqueeCeTour.Clear();
                 carteCliqueeCeTour.Clear();
 #if DEBUG
