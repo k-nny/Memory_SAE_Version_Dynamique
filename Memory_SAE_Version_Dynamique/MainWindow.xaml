@@ -68,10 +68,6 @@
                 FontSize="30"
                 Foreground="#FF0BCFCF"
                 Text="SCORE : " />
-<<<<<<< HEAD
-=======
-
->>>>>>> c29362a1bef948e9177a9f8bd018fe24e227fc4b
             <Rectangle
                 x:Name="RectVerifFin"
                 Canvas.Left="139"
