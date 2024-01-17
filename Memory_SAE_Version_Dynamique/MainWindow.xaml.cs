@@ -207,7 +207,7 @@ namespace Memory_SAE_Version_Dynamique
                 {
                     for (int j = 0; j < nbLigne; j++)
                     {
-                        if (!pairesCorrecteDos.Contains(listeBoutonsDosCarte[i,j]))
+                        if (!pairesCorrecteDos.Contains(listeBoutonsDosCarte[i,j]) && !dosCarteCliqueeCeTour.Contains(listeBoutonsDosCarte[i,j]))
                             listeBoutonsDosCarte[i, j].Visibility = Visibility.Visible;
                     }
                 }
