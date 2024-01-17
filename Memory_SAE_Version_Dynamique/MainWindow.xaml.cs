@@ -216,6 +216,7 @@ namespace Memory_SAE_Version_Dynamique
             }
         }
 
+        
         private void Verification()
         {
 #if DEBUG
@@ -313,5 +314,6 @@ namespace Memory_SAE_Version_Dynamique
             txtScore.Text = Math.Round(score).ToString();
             return score;
         }
+
     }
 }

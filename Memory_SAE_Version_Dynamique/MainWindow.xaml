@@ -8,6 +8,8 @@
     Title="MainWindow"
     Width="800"
     Height="450"
+    KeyDown="Window_KeyDown"
+    KeyUp="Window_KeyUp"
     WindowState="Maximized"
     mc:Ignorable="d">
     <Grid Background="#FF010153">
@@ -24,9 +26,7 @@
             <Button
                 x:Name="ButPause"
                 Canvas.Top="74"
-                Canvas.Right="28
-                
-                "
+                Canvas.Right="28                                  "
                 Width="89"
                 Height="39"
                 BorderBrush="#FF010153"
