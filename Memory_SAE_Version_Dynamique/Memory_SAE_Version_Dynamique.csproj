@@ -107,6 +107,9 @@
     <None Update="img\img1 (0).jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="img\Memory_Card_Game_Logo.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="img\pause.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

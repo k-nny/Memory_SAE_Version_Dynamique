@@ -15,17 +15,6 @@
     <Grid>
         <Canvas x:Name="MyCanvas">
             <Label
-                x:Name="Titre"
-                Canvas.Left="92"
-                Canvas.Top="36"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Center"
-                Background="#00000000"
-                Content="MEMORY"
-                FontSize="100"
-                FontWeight="Bold"
-                Foreground="White" />
-            <Label
                 x:Name="LabDifficulte"
                 Canvas.Left="155"
                 Canvas.Top="197"
@@ -73,5 +62,7 @@
                 Click="ButAnnuler_Click"
                 Content="Annuler" />
         </Canvas>
+        <Rectangle x:Name="rectLogo" HorizontalAlignment="Left" Height="100" Margin="177,71,0,0" VerticalAlignment="Top" Width="316" Fill="#FFFF0404"/>
+
     </Grid>
 </Window>

@@ -19,9 +19,13 @@ namespace Memory_SAE
     /// </summary>
     public partial class MenuDifficulte : Window
     {
+        
         public MenuDifficulte()
         {
             InitializeComponent();
+            ImageBrush logo = new ImageBrush();
+            logo.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/Memory_Card_Game_Logo.jpg"));
+            rectLogo.Fill = logo;
         }
 
         private void ButJouer_Click(object sender, RoutedEventArgs e)
