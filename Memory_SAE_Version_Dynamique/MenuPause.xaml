@@ -14,51 +14,48 @@
     <Grid>
         <Canvas x:Name="MyCanvas">
             <Label
-                x:Name="Titre"
-                Canvas.Left="92"
-                Canvas.Top="36"
+                x:Name="LabPause"
+                Canvas.Left="231"
+                Canvas.Top="175"
+                Width="260"
+                Height="84"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
-                Background="#00000000"
-                Content="MEMORY"
-                FontSize="100"
-                FontWeight="Bold"
-                Foreground="White" />
-            <Label
-                x:Name="LabPause"
-                Canvas.Left="238"
-                Canvas.Top="184"
-                Width="164"
-                Height="74"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
                 Content="PAUSE"
+                FontFamily="Viner Hand ITC"
                 FontSize="50"
                 FontWeight="Bold"
                 Foreground="White" />
             <Button
                 x:Name="ButReprendre"
-                Canvas.Left="155"
+                Canvas.Left="144"
                 Canvas.Top="309"
-                Width="80"
-                Height="30"
+                Width="96"
+                Height="50"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 Click="ButReprendre_Click"
-                Content="Reprendre"
-                RenderTransformOrigin="0.5,0.601">
-            </Button>
+                RenderTransformOrigin="0.5,0.601" />
             <Button
                 x:Name="ButMenu"
-                Canvas.Left="388"
+                Canvas.Left="407"
                 Canvas.Top="309"
-                Width="80"
-                Height="30"
-                HorizontalAlignment="Center"
+                Width="99"
+                Height="53"
+                HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 Background="#FFDDDDDD"
                 Click="ButMenu_Click"
                 Content="Menu" />
+            <Rectangle
+                x:Name="rectLogo"
+                Canvas.Left="172"
+                Canvas.Top="54"
+                Width="306"
+                Height="116"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Stroke="Black" />
         </Canvas>
     </Grid>
 </Window>
