@@ -244,8 +244,8 @@ namespace Memory_SAE_Version_Dynamique
                     dosCarteCliqueeCeTour[0].Visibility = Visibility.Visible;
                     dosCarteCliqueeCeTour[1].Visibility = Visibility.Visible;
                     moves++;
-                    CalculScore();
                 }
+                CalculScore();
                 dosCarteCliqueeCeTour[2].Visibility = Visibility.Visible;
                 dosCarteCliqueeCeTour.Clear();
                 carteCliqueeCeTour.Clear();
