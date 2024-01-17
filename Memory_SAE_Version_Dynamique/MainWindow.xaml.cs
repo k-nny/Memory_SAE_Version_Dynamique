@@ -39,7 +39,7 @@ namespace Memory_SAE_Version_Dynamique
         private ImageBrush dosCarte = new ImageBrush();
         private DispatcherTimer timer;
         private TimeSpan elapsedTime;
-        private bool isTimerRunning, menuFin, verifier = false;
+        private bool isTimerRunning, menuFin, verifier = false, paire = false;
         private int moves;
         private int nbLigne, nbCartes;
         private double score = 1000;
@@ -266,7 +266,7 @@ namespace Memory_SAE_Version_Dynamique
                 Thread.Sleep(200);
                 if (carteCliqueeCeTour[0] == carteCliqueeCeTour[1])
                 {
-                    score += 10;
+                    paire = true;
                     pairesCorrecte.Add(carteCliqueeCeTour[0]);
                     pairesCorrecte.Add(carteCliqueeCeTour[1]);
                     pairesCorrecteDos.Add(dosCarteCliqueeCeTour[0]);
@@ -342,8 +342,15 @@ namespace Memory_SAE_Version_Dynamique
             else if (resultat < 30)
                 coeff = 0.6;
             else coeff = 0.8;
-
-            score = score - (moves * coeff);
+            if (paire == true)
+            {
+                score += 10;
+                paire = false;
+            }
+            else
+            {
+                score = score - (moves * coeff);
+            }
             txtScore.Text = Math.Round(score).ToString();
             return score;
         }
