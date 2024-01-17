@@ -209,7 +209,7 @@ namespace Memory_SAE_Version_Dynamique
             }
             else
             {
-
+                this.Visibility = Visibility.Hidden;
                 MainWindow mainWindow = new MainWindow();
                 this.Close();
                 mainWindow.Show();
