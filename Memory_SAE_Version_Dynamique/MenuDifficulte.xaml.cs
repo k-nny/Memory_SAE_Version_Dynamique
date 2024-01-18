@@ -28,7 +28,7 @@ namespace Memory_SAE
             rectLogo.Fill = logo;
             ImageBrush jouer = new ImageBrush();
             jouer.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/jouer.png"));
-            ButJouer.Background = jouer;
+            ButJouer.Fill = jouer;
         }
 
         private void ButJouer_Click(object sender, RoutedEventArgs e)

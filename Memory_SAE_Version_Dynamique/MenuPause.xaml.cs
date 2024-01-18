@@ -27,7 +27,10 @@ namespace Memory_SAE_Version_Dynamique
             rectLogo.Fill = logo;
             ImageBrush jouer = new ImageBrush();
             jouer.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/jouer.png"));
-            ButReprendre.Background = jouer;
+            ButReprendre.Fill = jouer;
+            ImageBrush menu = new ImageBrush();
+            menu.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/menu.png"));
+            ButMenu.Fill = menu;
         }
 
         private void ButReprendre_Click(object sender, RoutedEventArgs e)

@@ -13,43 +13,36 @@
     WindowStartupLocation="CenterScreen">
     <Grid>
         <Canvas x:Name="MyCanvas">
-            <Label
-                x:Name="Titre"
-                Canvas.Left="92"
-                Canvas.Top="36"
+            <Rectangle
+                x:Name="rectLogo"
+                Canvas.Left="172"
+                Canvas.Top="54"
+                Width="306"
+                Height="116"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
-                Background="#00000000"
-                Content="MEMORY"
-                FontSize="100"
-                FontWeight="Bold"
-                Foreground="White" />
-            <Button
+                Fill="Red"
+                Stroke="Black" />
+            <Rectangle
                 x:Name="ButRejouer"
                 Canvas.Left="155"
                 Canvas.Top="309"
-                Width="80"
+                Width="100"
                 Height="30"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
-                Click="ButRejouer_Click"
-                Content="Rejouer"
-                RenderTransformOrigin="0.5,0.601">
-                <Button.Background>
-                    <SolidColorBrush Color="#FFDDDDDD" />
-                </Button.Background>
-            </Button>
-            <Button
+                Fill="#FF59BD17"
+                MouseLeftButtonDown="ButRejouer_Click" />
+            <Rectangle
                 x:Name="ButMenu"
                 Canvas.Left="388"
                 Canvas.Top="309"
-                Width="80"
+                Width="100"
                 Height="30"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                Background="#FFDDDDDD"
-                Click="ButMenu_Click"
-                Content="Quitter" />
+                Fill="#FF1E50ED"
+                MouseLeftButtonDown="ButMenu_Click" />
             <TextBlock
                 x:Name="LabResultat"
                 Canvas.Left="0"

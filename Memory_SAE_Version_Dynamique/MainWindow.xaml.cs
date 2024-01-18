@@ -104,7 +104,7 @@ namespace Memory_SAE_Version_Dynamique
         {
             ImageBrush pause = new ImageBrush();
             pause.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/pause.jpg"));
-            this.ButPause.Background = pause;
+            this.ButPause.Fill = pause;
             int numImage = 0;
             if (difficulteChoisie == "Facile")
                 nbLigne = 4;

@@ -22,6 +22,12 @@ namespace Memory_SAE_Version_Dynamique
         public VictoireDefaite()
         {
             InitializeComponent();
+            ImageBrush logo = new ImageBrush();
+            logo.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/Memory_Card_Game_Logo.jpg"));
+            rectLogo.Fill = logo;
+            ImageBrush menu = new ImageBrush();
+            menu.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/menu.png"));
+            ButRejouer.Fill = menu;
         }
 
 

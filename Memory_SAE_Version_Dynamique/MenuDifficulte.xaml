@@ -54,27 +54,27 @@
                     FontFamily="Viner Hand ITC"
                     FontSize="16" />
             </ComboBox>
-            <Button
+            <Rectangle
                 x:Name="ButJouer"
                 Canvas.Left="161"
                 Canvas.Top="324"
-                Width="99"
-                Height="48"
+                Width="100"
+                Height="30"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
-                Click="ButJouer_Click"
+                Fill="#FF4EC12F"
+                MouseLeftButtonDown="ButJouer_Click"
                 RenderTransformOrigin="0.5,0.601" />
-            <Button
+            <Rectangle
                 x:Name="ButAnnuler"
                 Canvas.Left="383"
                 Canvas.Top="324"
-                Width="111"
-                Height="48"
+                Width="100"
+                Height="30"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
-                Background="#FFDDDDDD"
-                Click="ButAnnuler_Click"
-                Content="Annuler" />
+                Fill="#FF752626"
+                MouseLeftButtonDown="ButAnnuler_Click" />
         </Canvas>
         <Rectangle
             x:Name="rectLogo"

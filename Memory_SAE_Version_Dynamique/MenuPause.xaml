@@ -26,27 +26,27 @@
                 FontSize="50"
                 FontWeight="Bold"
                 Foreground="White" />
-            <Button
+            <Rectangle
                 x:Name="ButReprendre"
                 Canvas.Left="144"
                 Canvas.Top="309"
-                Width="96"
-                Height="50"
+                Width="100"
+                Height="30"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
-                Click="ButReprendre_Click"
+                Fill="#FF3DE011"
+                MouseLeftButtonDown="ButReprendre_Click"
                 RenderTransformOrigin="0.5,0.601" />
-            <Button
+            <Rectangle
                 x:Name="ButMenu"
                 Canvas.Left="407"
                 Canvas.Top="309"
-                Width="99"
-                Height="53"
+                Width="100"
+                Height="30"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
-                Background="#FFDDDDDD"
-                Click="ButMenu_Click"
-                Content="Menu" />
+                Fill="#FF0C3B98"
+                MouseLeftButtonDown="ButMenu_Click" />
             <Rectangle
                 x:Name="rectLogo"
                 Canvas.Left="172"
@@ -55,6 +55,7 @@
                 Height="116"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
+                Fill="Red"
                 Stroke="Black" />
         </Canvas>
     </Grid>

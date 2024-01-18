@@ -8,10 +8,12 @@
     Title="MainWindow"
     Width="800"
     Height="450"
+    MinWidth="700"
+    MinHeight="300"
     KeyDown="Window_KeyDown"
     KeyUp="Window_KeyUp"
     WindowState="Maximized"
-    mc:Ignorable="d" >
+    mc:Ignorable="d">
     <Grid Background="#FF010153">
         <Grid x:Name="GridJeu" Margin="0,0,150,0" />
         <Canvas Margin="650,0,0,0">
@@ -23,28 +25,15 @@
                 FontSize="30"
                 Foreground="#FF00FDFD"
                 Text="00:00" />
-            <Button
+            <Rectangle
                 x:Name="ButPause"
                 Canvas.Top="74"
                 Canvas.Right="28                                  "
                 Width="89"
                 Height="39"
-                BorderBrush="#FF010153"
-                Click="ButPause_Click"
-                Content=""
-                RenderTransformOrigin="0.5,0.5">
-                <Button.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform />
-                        <SkewTransform />
-                        <RotateTransform Angle="-0.358" />
-                        <TranslateTransform />
-                    </TransformGroup>
-                </Button.RenderTransform>
-
-
-
-            </Button>
+                Fill="#FFF5A515"
+                MouseLeftButtonDown="ButPause_Click"
+                RenderTransformOrigin="0.5,0.5" />
             <TextBlock
                 x:Name="txtScore"
                 Canvas.Top="201"
