@@ -68,11 +68,11 @@
             <Rectangle
                 x:Name="ButAnnuler"
                 Canvas.Left="383"
-                Canvas.Top="324"
-                Width="100"
-                Height="30"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Center"
+                Canvas.Top="319"
+                Width="110"
+                Height="35"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
                 Fill="#FF752626"
                 MouseLeftButtonDown="ButAnnuler_Click" />
         </Canvas>

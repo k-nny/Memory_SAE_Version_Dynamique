@@ -28,6 +28,9 @@ namespace Memory_SAE_Version_Dynamique
             ImageBrush menu = new ImageBrush();
             menu.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/menu.png"));
             ButRejouer.Fill = menu;
+            ImageBrush quitter = new ImageBrush();
+            quitter.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/quitter.png"));
+            ButMenu.Fill = quitter;
         }
 
 

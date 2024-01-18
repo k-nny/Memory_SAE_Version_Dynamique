@@ -53,7 +53,7 @@
                 FontWeight="Bold"
                 Foreground="White"
                 Text=""
-                TextAlignment="Center" />
+                TextAlignment="Center" FontFamily="Showcard Gothic" />
             <TextBlock
                 x:Name="LabResultatScore"
                 Canvas.Left="0"
@@ -64,7 +64,7 @@
                 FontWeight="Bold"
                 Foreground="White"
                 Text=""
-                TextAlignment="Center" />
+                TextAlignment="Center" FontFamily="Kristen ITC" />
             <Border
                 Width="650"
                 Height="434"
