@@ -31,9 +31,12 @@
                 Canvas.Right="28                                  "
                 Width="89"
                 Height="39"
-                Fill="#FFF5A515"
                 MouseLeftButtonDown="ButPause_Click"
-                RenderTransformOrigin="0.5,0.5" />
+                RenderTransformOrigin="0.5,0.5" >
+                <Rectangle.Fill>
+                    <SolidColorBrush Color="#FFF5A515" Opacity="1"/>
+                </Rectangle.Fill>
+            </Rectangle>
             <TextBlock
                 x:Name="txtScore"
                 Canvas.Top="201"
