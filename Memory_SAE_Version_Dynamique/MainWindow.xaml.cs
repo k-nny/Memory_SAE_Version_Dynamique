@@ -109,17 +109,17 @@ namespace Memory_SAE_Version_Dynamique
             if (difficulteChoisie == "Facile")
             {
                 nbLigne = 4;
-                score = 100;
+                score = 25;
             }
             else if (difficulteChoisie == "Intermédiaire")
             {
                 nbLigne = 6;
-                score = 1000;
+                score = 75;
             }
             else
             {
                 nbLigne = 8;
-                score = 1500;
+                score = 1000;
             }
             nbCartes = (nbLigne * nbLigne) / 2;
 
@@ -213,7 +213,7 @@ namespace Memory_SAE_Version_Dynamique
                 {
                     for (int j = 0; j < nbLigne; j++)
                     {
-                        if (!pairesCorrecteDos.Contains(listeBoutonsDosCarte[i,j]) && !dosCarteCliqueeCeTour.Contains(listeBoutonsDosCarte[i,j]))
+                        if (!pairesCorrecteDos.Contains(listeBoutonsDosCarte[i, j]) && !dosCarteCliqueeCeTour.Contains(listeBoutonsDosCarte[i, j]))
                             listeBoutonsDosCarte[i, j].Visibility = Visibility.Visible;
                     }
                 }
@@ -253,7 +253,7 @@ namespace Memory_SAE_Version_Dynamique
             }
         }
 
-        
+
         private void Verification()
         {
 #if DEBUG
@@ -266,7 +266,7 @@ namespace Memory_SAE_Version_Dynamique
                 carteCliqueeCeTour.Insert(2, "");
                 dosCarteCliqueeCeTour.Add(RectVerifFin);
             }
-            if (carteCliqueeCeTour.Count <=2)
+            if (carteCliqueeCeTour.Count <= 2)
             {
                 MediaPlayer sonCarteVisible = new MediaPlayer();
                 var varSonCarteVisible = new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/PageQuiTourne.wav");

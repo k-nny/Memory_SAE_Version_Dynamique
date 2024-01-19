@@ -32,9 +32,9 @@
                 Width="89"
                 Height="39"
                 MouseLeftButtonDown="ButPause_Click"
-                RenderTransformOrigin="0.5,0.5" >
+                RenderTransformOrigin="0.5,0.5">
                 <Rectangle.Fill>
-                    <SolidColorBrush Color="#FFF5A515" Opacity="1"/>
+                    <SolidColorBrush Opacity="1" Color="#FFF5A515" />
                 </Rectangle.Fill>
             </Rectangle>
             <TextBlock
@@ -46,7 +46,7 @@
                 FontFamily="Chiller"
                 FontSize="40"
                 Foreground="#FFFF0011"
-                Text="1000" />
+                Text="" />
             <TextBlock
                 x:Name="txtScore_Copy"
                 Canvas.Top="148"
