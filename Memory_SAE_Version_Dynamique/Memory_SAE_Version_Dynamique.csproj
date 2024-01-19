@@ -116,6 +116,12 @@
     <None Update="img\Menu.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="img\PageQuiTourne.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="img\PageQuiTourneDos.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="img\pause.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

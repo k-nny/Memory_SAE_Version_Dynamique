@@ -42,7 +42,7 @@ namespace Memory_SAE_Version_Dynamique
         private bool isTimerRunning, menuFin, verifier = false, paire = false;
         private int moves;
         private int nbLigne, nbCartes;
-        private double score = 1000;
+        private double score;
         private List<string> images = new List<string>();
         private List<string> pairesCorrecte = new List<string>();
         private List<Rectangle> pairesCorrecteDos = new List<Rectangle>();
@@ -107,9 +107,15 @@ namespace Memory_SAE_Version_Dynamique
             this.ButPause.Fill = pause;
             int numImage = 0;
             if (difficulteChoisie == "Facile")
+            {
                 nbLigne = 4;
+                score = 100;
+            }
             else if (difficulteChoisie == "Intermédiaire")
+            {
                 nbLigne = 6;
+                score = 1000;
+            }
             else
             {
                 nbLigne = 8;
@@ -260,7 +266,13 @@ namespace Memory_SAE_Version_Dynamique
                 carteCliqueeCeTour.Insert(2, "");
                 dosCarteCliqueeCeTour.Add(RectVerifFin);
             }
-
+            if (carteCliqueeCeTour.Count <=2)
+            {
+                MediaPlayer sonCarteVisible = new MediaPlayer();
+                var varSonCarteVisible = new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/PageQuiTourne.wav");
+                sonCarteVisible.Open(varSonCarteVisible);
+                sonCarteVisible.Play();
+            }
             if (carteCliqueeCeTour.Count == 3)
             {
                 Thread.Sleep(200);
@@ -278,6 +290,10 @@ namespace Memory_SAE_Version_Dynamique
                     dosCarteCliqueeCeTour[0].Visibility = Visibility.Visible;
                     dosCarteCliqueeCeTour[1].Visibility = Visibility.Visible;
                     moves++;
+                    MediaPlayer sonCarteInvisible = new MediaPlayer();
+                    var varSonCarteInvisible = new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/PageQuiTourneDos.wav");
+                    sonCarteInvisible.Open(varSonCarteInvisible);
+                    sonCarteInvisible.Play();
                 }
                 CalculScore();
                 dosCarteCliqueeCeTour[2].Visibility = Visibility.Visible;
